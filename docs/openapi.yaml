@@ -1,23 +1,37 @@
 openapi: 3.1.0
+
 info:
   title: Task API
   version: 1.0.0
+
 servers:
   - url: http://localhost:8080
     description: Local development server
   - url: https://task-api-service-gzxp.onrender.com
     description: Production server
+
 tags:
   - name: Tasks
     description: Task-related endpoints
   - name: Monitoring
     description: Operational endpoints, such as health checks
+
 paths:
   /tasks:
     get:
       summary: List all tasks
       tags:
         - Tasks
+
+      parameters:
+        - in: query
+          name: completed
+          required: false
+          schema:
+            type: string
+            enum: [true, false]
+          description: Filter tasks by completion status
+
       responses:
         '200':
           description: OK
@@ -27,6 +41,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+
     post:
       summary: Create a new task
       tags:
@@ -60,6 +75,7 @@ paths:
                 example:
                   errors:
                     - 'Title must be at least 3 characters'
+
   /health:
     get:
       summary: Health Check
@@ -77,6 +93,7 @@ paths:
                   status:
                     type: string
                     example: ok
+
 components:
   schemas:
     Task:
