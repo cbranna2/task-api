@@ -3,8 +3,10 @@ info:
   title: Task API
   version: 1.0.0
 servers:
-  - url: http://localhost:3000
-    description: Local development servers
+  - url: http://localhost:8080
+    description: Local development server
+  - url: https://task-api-service-gzxp.onrender.com
+    description: Production server
 tags:
   - name: Tasks
     description: Task-related endpoints
